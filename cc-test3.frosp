@@ -1,0 +1,11 @@
+($x $y ^x ^y) $swap
+
+(swap force) $forcecc
+
+('terminating println) $terminate
+
+($cc println ^cc) $ccprintln
+
+^terminate
+
+($cc1 ($cc2 1 ^cc2 force) ($cc3 ^println force ^cc1 force ^cc3 force) forcecc) force

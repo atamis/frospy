@@ -1,0 +1,16 @@
+($x $y ^x ^y) $swap
+
+(swap force) $forcecc
+
+() $terminate
+
+($cc
+ ($cc
+  ($cc 2 ^cc force)
+  ($cc 1 ^cc force)
+  ($cc $x $y 'x push ^cc forcecc)
+  ^cc
+  forcecc)
+ ^cc forcecc)
+(terminate)
+forcecc
