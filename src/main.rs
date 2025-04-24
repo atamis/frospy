@@ -1,11 +1,24 @@
 use std::io;
 
 use chumsky::Parser;
+use clap::{Parser as ClapParser, Subcommand};
 use frospy::{
     compiler2,
     eval::{self, EvalStacktrace},
     parser::parser, //trace_ctx, Ctx
 };
+
+#[derive(ClapParser, Debug)]
+struct Cli {
+    #[command(subcommand)]
+    command: Command,
+}
+
+#[derive(Subcommand, Debug)]
+enum Command {
+    Eval,
+    Compile,
+}
 
 fn eval() {
     let src = io::read_to_string(io::stdin()).expect("reading stdin");
@@ -68,9 +81,9 @@ fn compile() {
 }
 
 fn main() {
-    if true {
-        compile()
-    } else {
-        eval()
+    let cli = Cli::parse();
+    match cli.command {
+        Command::Eval => eval(),
+        Command::Compile => compile(),
     }
 }
